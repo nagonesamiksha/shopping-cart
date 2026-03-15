@@ -1,0 +1,27 @@
+syntax ="proto3";
+
+option java_multiple_files =true;
+
+option java_package ="com.saurabh.grpc.dashboardserviceforwebsocket";
+
+service DashBoardServiceForWebsocket1{
+  rpc getProductWithSimilarProducts(ProductRequest) returns (ProductResponse);
+}
+
+message ProductRequest {
+  string userId = 1;
+  string category = 2;
+  string productId = 3;
+}
+
+message ProductResponse{
+  message Products{
+    string productId = 1;
+    string productCategory = 2;
+    string productName = 3;
+    int32 productPrice = 4;
+    string productDescription = 5;
+    int32 productCount = 6;
+    string productImgLink = 7;
+  }
+}

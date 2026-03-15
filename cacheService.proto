@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.saurabh.grpc.cservice";
+
+message UserDetails {
+  string userid = 1;
+  string name = 2;
+  string email = 3;
+  string contact = 4;
+  string dob = 5;
+}
+
+message UserDetailResponse {
+  bool response = 1;
+}
+
+message UserOtp {
+  string userid = 1;
+  string otp = 2;
+}
+
+message ResponseOfOtp {
+  bool isStored = 1;
+}
+message IsOtpCorrect{
+   string code=1;
+}
+message GetUserDetails{
+  string name=1;
+  string email=2;
+  string contact=3;
+  string dob=4;
+  bool status=5;
+
+}
+message GetUserDetailsRequest{
+  string userid=1;
+}
+message EraseUserRequest{
+  string userId=1;
+}
+message EraseUserResponse{
+  bool isUserErased=1;
+}
+
+
+message StoreOtpForResetPasswordRequest{
+  string email=1;
+  string otp=2;
+}
+message StoreOtpForResetPasswordResponse{
+  bool isOtpForResetPasswordStored =1;
+}
+
+message CheckOTPForForgotPasswordRequest{
+  string email=1;
+  string otp=2;
+}
+message CheckOTPForForgotPasswordResponse{
+  int32 code =1;
+}
+
+message EraseUserForForgotPasswordRequest{
+  string email=1;
+}
+message EraseUserForForgotPasswordResponse{
+  bool isDataCleaned =1;
+}
+service CacheService{
+  rpc SendUserDetails(UserDetails) returns (UserDetailResponse);
+  rpc SendUserIdAndOtp(UserOtp) returns (ResponseOfOtp);
+  rpc CheckOtp(UserOtp) returns(IsOtpCorrect);
+  rpc GetUserDetailsFromCache(GetUserDetailsRequest) returns (GetUserDetails);
+  rpc EraseUserDetailsFromCache(EraseUserRequest) returns (EraseUserResponse);
+  rpc StoreUserOtpForResetPassword(StoreOtpForResetPasswordRequest) returns (StoreOtpForResetPasswordResponse);
+  rpc CheckOTPForResetPassword(CheckOTPForForgotPasswordRequest) returns (CheckOTPForForgotPasswordResponse);
+  rpc CleanData(EraseUserForForgotPasswordRequest) returns (EraseUserForForgotPasswordResponse);
+
+}

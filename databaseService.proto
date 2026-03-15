@@ -1,0 +1,81 @@
+syntax ="proto3";
+
+option java_multiple_files =true;
+
+option java_package ="com.saurabh.grpc.userdbservice";
+service DBService{
+  rpc checkEmail(EmailRequest) returns(EmailResponse);
+  rpc sendDataToDB(GetUserRequestFromUserService) returns (GetUserResponseFromUserService);
+  rpc userCheck(UserCheckRequest) returns (UserCheckResponse);
+  rpc getName(GetNameRequest) returns (GetNameResponse);
+  rpc checkIfEmailExists(CheckEmailRequest) returns (CheckEmailResponse);
+  rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+  rpc CheckUserId(UserIdValidationRequest) returns (UserIdValidationResponse);
+  rpc GetPasswordFromDB(PasswordFromDBRequest) returns(PasswordFromDBResponse);
+}
+
+
+message EmailRequest{
+  string email =1;
+}
+message EmailResponse{
+  bool isExists =1;
+}
+message GetUserRequestFromUserService{
+  string userid=1;
+  string name =2;
+  string email=3;
+  string contact =4;
+  string dob =5;
+  string password =6;
+
+}
+message  GetUserResponseFromUserService{
+  bool isReceived =1;
+}
+message UserCheckRequest{
+  string userid =1;
+  string password=2;
+}
+
+message UserCheckResponse{
+  bool isUserThere =1;
+  int32 code =2;
+}
+
+message GetNameRequest{
+  string userid=1;
+}
+message GetNameResponse{
+  string userName =1;
+}
+
+message CheckEmailRequest{
+  string emailId=1;
+}
+message CheckEmailResponse{
+  bool isEmailThere=1;
+}
+
+message UpdatePasswordRequest{
+  string email =1;
+  string password=2;
+}
+message UpdatePasswordResponse{
+  int32 code=1;
+}
+
+
+message UserIdValidationRequest{
+  string userId=1;
+}
+message UserIdValidationResponse{
+  bool isUserIdThere=1;
+}
+
+message PasswordFromDBRequest{
+  string userId=1;
+}
+message PasswordFromDBResponse{
+  string password =2;
+}

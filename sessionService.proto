@@ -1,0 +1,43 @@
+syntax ="proto3";
+option java_multiple_files=true;
+option java_package= "com.saurabh.grpc.sessionService";
+
+service SessionService{
+rpc checkSession(SessionExistsUpdateRequest) returns (SessionExistsUpdateResponse);
+rpc logTheUserOut(LogUserOutRequest) returns (LogUserOutResponse);
+rpc checkLoginStatusForWebsocket(LoginInfoRequest) returns (LoginInfoResponse);
+rpc logUserOutForcefully(LogUserOffWebSocketRequest) returns (LogUserOffWebSocketResponse);
+}
+message LogUserOffWebSocketRequest{
+  string userId=1;
+  string device=2;
+}
+message LogUserOffWebSocketResponse{
+  bool isUserLoggedOffFromWebSocket =1;
+}
+
+message LoginInfoRequest{
+  string userId=1;
+  string device =2;
+
+}
+message LoginInfoResponse{
+  bool isUserSessionActive=1;
+}
+
+message SessionExistsUpdateRequest{
+  string userId =1;
+  string device =2;
+}
+
+message SessionExistsUpdateResponse{
+  bool isSessionActive =1;
+}
+
+message LogUserOutRequest{
+  string userId =1;
+  string device =2;
+}
+message LogUserOutResponse{
+  bool isUserLoggedOff =1;
+}

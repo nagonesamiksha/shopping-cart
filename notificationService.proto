@@ -1,0 +1,26 @@
+syntax= "proto3";
+
+option java_multiple_files =true;
+option java_package ="com.saurabh.grpc.usernotificationservice";
+
+
+message EmailRequestNS{
+  string otp =1;
+  string email = 2;
+}
+message EmailResponseNS{
+  bool success =1;
+}
+message SendOtpResetPasswordRequest{
+  string emailid=1;
+}
+message SendOtpResetPasswordResponse{
+  bool isOtpSent =1;
+  string otp=2;
+}
+
+service NotificationService{
+  rpc SendEmail(EmailRequestNS) returns (EmailResponseNS);//here intially I had added {} at the end,If any error occurs recheck this method
+  rpc SendEmailForPasswordReset(SendOtpResetPasswordRequest) returns (SendOtpResetPasswordResponse);
+
+}
