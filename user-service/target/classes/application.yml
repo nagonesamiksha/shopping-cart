@@ -1,0 +1,28 @@
+server:
+  port: 4040
+
+grpc:
+  client:
+    userdbservice:
+      address: static://localhost:1010
+      negotiationType: plaintext
+    NService:
+      address: static://localhost:2010
+      negotiationType: plaintext
+    CService:
+      address: static://localhost:3010
+      negotiationType: plaintext
+
+
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset : earliest
+      value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    producer:
+      bootstrap-servers: localhost:9092
+      key.deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value.deserializer: org.apache.kafka.common.serialization.StringSerializer
